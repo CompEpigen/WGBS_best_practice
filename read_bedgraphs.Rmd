@@ -16,7 +16,7 @@ vignette: >
 
 # Introduction 
 
-The core functionality of `methrix` is a generic reader function for virtually every possible format of single sample bed, bedGrpah or txt files. 
+The core functionality of `methrix` is a generic reader function for virtually every possible format of single sample bed, bedGraph or txt files. 
 
 This description helps the users to find the correct settings for their own files. 
 
@@ -46,7 +46,9 @@ bdg_files <- list.files(
 ```
 
 The sample annotation is a `data.frame` containing all annotations we would like to have in the final object. The rownames will be used as sample names. 
+
 ** The sample annotation and the file list should have the same order! **
+
 Since the filenames and the sample names can be different, there is no way to check if the order is correct during reading in. Therefore the user has to take care that they are in the correct order. 
 
 ```{r}
@@ -67,6 +69,7 @@ print(sample_anno)
 ```
 
 The sample names will be changed if they contain not allowed characters (e.g. space) or don't follow the R naming conventions (e.g. starts with number). In this case a warning will appear during read in.  
+
 It is possible not to provide annotation data. In this case the sample names will be converted from the filenames and the `colData` slot of the `methrix` object will be empty. 
 
 
@@ -185,15 +188,15 @@ meth <- methrix::read_bedgraphs(
 
 `methrix` automatically assigns the column layout for many widely used software outputs. Currently supported:
 
-[Bismark_cov](https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html#iv-bismark-methylation-extractor)
+* [Bismark_cov](https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html#iv-bismark-methylation-extractor)
 
-[MethylDackel](https://github.com/dpryan79/MethylDackel) - default MethylDackel extract output
+* [MethylDackel](https://github.com/dpryan79/MethylDackel) - default MethylDackel extract output
 
-[MethylcTools](https://github.com/hovestadt/methylCtools)
+* [MethylcTools](https://github.com/hovestadt/methylCtools)
 
-[BisSNP](http://people.csail.mit.edu/dnaase/bissnp2011/)
+* [BisSNP](http://people.csail.mit.edu/dnaase/bissnp2011/)
 
-"BSseeker2_CGmap",  [BSseeker2](https://github.com/BSSeeker/BSseeker2) used with 
+* "BSseeker2_CGmap",  [BSseeker2](https://github.com/BSSeeker/BSseeker2) used with 
 [CGmapTools](https://cgmaptools.github.io/)
 
 If these pipelines are used, the user doesn't have to define the following arguments: 
@@ -207,10 +210,12 @@ If they are still defined, they won't be taken into account.
 
 * Required: `chr_idx` and `start_idx` for identifying the position.
 * A combination of M (count of methylated reads), U (count of unmethylated reads), beta (beta methylation value) and coverage (read count) so that all the values can be calculated. Accepted combinations: 
+
                                         * M and U
                                         * M and coverage 
                                         * U and coverage
                                         * beta and coverage
+                                        
 The beta value can be either percentage or ratio. The function will check the first lines and will convert it to ratio. 
 
 ### Strandedness
@@ -274,6 +279,7 @@ During read in the user  have to decide on parameters that are mostly affected b
 If the memory is limited and/or the study population is large, there is an option to use HDF5 backend.  
 Only one bedgraph file is in the memory at the same time, while the resulting object won't be stored in the memory, but on-disk. 
 Additional arguments to use HDF5:
+
 * Set `h5=TRUE` 
 * Set `vect=FALSE`
 * h5_dir --> a directory to save the final object. It is possible to save the object later. It increases the processing time significantly.  

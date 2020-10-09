@@ -1664,7 +1664,7 @@ div.tocify {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The core functionality of <code>methrix</code> is a generic reader function for virtually every possible format of single sample bed, bedGrpah or txt files.</p>
+<p>The core functionality of <code>methrix</code> is a generic reader function for virtually every possible format of single sample bed, bedGraph or txt files.</p>
 <p>This description helps the users to find the correct settings for their own files.</p>
 <div id="generic-settings" class="section level2">
 <h2>Generic settings</h2>
@@ -1678,7 +1678,9 @@ div.tocify {
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">pattern =</span> <span class="st">&quot;*bedGraph</span><span class="ch">\\</span><span class="st">.gz$&quot;</span>,</span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">full.names =</span> <span class="ot">TRUE</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a>)</span></code></pre></div>
-<p>The sample annotation is a <code>data.frame</code> containing all annotations we would like to have in the final object. The rownames will be used as sample names. ** The sample annotation and the file list should have the same order! ** Since the filenames and the sample names can be different, there is no way to check if the order is correct during reading in. Therefore the user has to take care that they are in the correct order.</p>
+<p>The sample annotation is a <code>data.frame</code> containing all annotations we would like to have in the final object. The rownames will be used as sample names.</p>
+<p>** The sample annotation and the file list should have the same order! **</p>
+<p>Since the filenames and the sample names can be different, there is no way to check if the order is correct during reading in. Therefore the user has to take care that they are in the correct order.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#Generate some sample annotation table</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>sample_anno &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">row.names =</span> <span class="kw">gsub</span>(</span>
@@ -1697,8 +1699,8 @@ div.tocify {
 ## C2    cancer pair2
 ## N1    normal pair1
 ## N2    normal pair2</code></pre>
-<p>The sample names will be changed if they contain not allowed characters (e.g. space) or don’t follow the R naming conventions (e.g. starts with number). In this case a warning will appear during read in.<br />
-It is possible not to provide annotation data. In this case the sample names will be converted from the filenames and the <code>colData</code> slot of the <code>methrix</code> object will be empty.</p>
+<p>The sample names will be changed if they contain not allowed characters (e.g. space) or don’t follow the R naming conventions (e.g. starts with number). In this case a warning will appear during read in.</p>
+<p>It is possible not to provide annotation data. In this case the sample names will be converted from the filenames and the <code>colData</code> slot of the <code>methrix</code> object will be empty.</p>
 </div>
 <div id="reference-data" class="section level3">
 <h3>Reference data</h3>
@@ -1749,7 +1751,7 @@ It is possible not to provide annotation data. In this case the sample names wil
 <pre><code>## --CpGs missing: 28,216,746 (from known reference CpGs)</code></pre>
 <pre><code>## -Processing:    N2.bedGraph.gz</code></pre>
 <pre><code>## --CpGs missing: 28,216,747 (from known reference CpGs)</code></pre>
-<pre><code>## -Finished in:  56.1s elapsed (50.0s cpu)</code></pre>
+<pre><code>## -Finished in:  55.3s elapsed (49.8s cpu)</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">#or just use the name of the BSgenome package</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a></span>
 <span id="cb27-3"><a href="#cb27-3"></a><span class="co">#Read the files </span></span>
@@ -1792,7 +1794,7 @@ It is possible not to provide annotation data. In this case the sample names wil
 <pre><code>## --CpGs missing: 379,928 (from known reference CpGs)</code></pre>
 <pre><code>## -Processing:    N2.bedGraph.gz</code></pre>
 <pre><code>## --CpGs missing: 379,923 (from known reference CpGs)</code></pre>
-<pre><code>## -Finished in:  5.330s elapsed (1.930s cpu)</code></pre>
+<pre><code>## -Finished in:  5.230s elapsed (1.920s cpu)</code></pre>
 <p>Changing sample names:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">#Generate some sample annotation table</span></span>
 <span id="cb44-2"><a href="#cb44-2"></a>sample_anno &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
@@ -1844,25 +1846,32 @@ It is possible not to provide annotation data. In this case the sample names wil
 <pre><code>## --CpGs missing: 28,216,746 (from known reference CpGs)</code></pre>
 <pre><code>## -Processing:    N2.bedGraph.gz</code></pre>
 <pre><code>## --CpGs missing: 28,216,747 (from known reference CpGs)</code></pre>
-<pre><code>## -Finished in:  50.6s elapsed (44.4s cpu)</code></pre>
+<pre><code>## -Finished in:  50.3s elapsed (43.8s cpu)</code></pre>
 </div>
 <div id="predifined-pipelines" class="section level3">
 <h3>Predifined pipelines</h3>
 <p><code>methrix</code> automatically assigns the column layout for many widely used software outputs. Currently supported:</p>
-<p><a href="https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html#iv-bismark-methylation-extractor">Bismark_cov</a></p>
-<p><a href="https://github.com/dpryan79/MethylDackel">MethylDackel</a> - default MethylDackel extract output</p>
-<p><a href="https://github.com/hovestadt/methylCtools">MethylcTools</a></p>
-<p><a href="http://people.csail.mit.edu/dnaase/bissnp2011/">BisSNP</a></p>
-<p>“BSseeker2_CGmap”, <a href="https://github.com/BSSeeker/BSseeker2">BSseeker2</a> used with <a href="https://cgmaptools.github.io/">CGmapTools</a></p>
+<ul>
+<li><p><a href="https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html#iv-bismark-methylation-extractor">Bismark_cov</a></p></li>
+<li><p><a href="https://github.com/dpryan79/MethylDackel">MethylDackel</a> - default MethylDackel extract output</p></li>
+<li><p><a href="https://github.com/hovestadt/methylCtools">MethylcTools</a></p></li>
+<li><p><a href="http://people.csail.mit.edu/dnaase/bissnp2011/">BisSNP</a></p></li>
+<li><p>“BSseeker2_CGmap”, <a href="https://github.com/BSSeeker/BSseeker2">BSseeker2</a> used with <a href="https://cgmaptools.github.io/">CGmapTools</a></p></li>
+</ul>
 <p>If these pipelines are used, the user doesn’t have to define the following arguments: <code>chr_idx</code>, <code>start_idx</code>, <code>end_idx</code>, <code>beta_idx</code>, <code>M_idx</code>, <code>U_idx</code>, <code>strand_idx</code>, <code>cov_idx</code></p>
 <p>If they are still defined, they won’t be taken into account.</p>
 </div>
 <div id="idx-columns" class="section level3">
 <h3>idx columns</h3>
 <ul>
-<li>Required: <code>chr_idx</code> and <code>start_idx</code> for identifying the position.</li>
-<li>A combination of M (count of methylated reads), U (count of unmethylated reads), beta (beta methylation value) and coverage (read count) so that all the values can be calculated. Accepted combinations: * M and U * M and coverage * U and coverage * beta and coverage The beta value can be either percentage or ratio. The function will check the first lines and will convert it to ratio.</li>
+<li><p>Required: <code>chr_idx</code> and <code>start_idx</code> for identifying the position.</p></li>
+<li><p>A combination of M (count of methylated reads), U (count of unmethylated reads), beta (beta methylation value) and coverage (read count) so that all the values can be calculated. Accepted combinations:</p>
+<pre><code>                                  * M and U
+                                  * M and coverage 
+                                  * U and coverage
+                                  * beta and coverage</code></pre></li>
 </ul>
+<p>The beta value can be either percentage or ratio. The function will check the first lines and will convert it to ratio.</p>
 </div>
 <div id="strandedness" class="section level3">
 <h3>Strandedness</h3>
@@ -1871,29 +1880,29 @@ It is possible not to provide annotation data. In this case the sample names wil
 <ul>
 <li><code>stranded</code> Is the data in stranded format? If for each CpG position there are two values, the data is stranded. In many cases the strand information is available (+ or -).</li>
 </ul>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="co">#chr21 27866423  2 8 +</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a><span class="co">#chr21 27866424  1 3 -</span></span>
-<span id="cb64-3"><a href="#cb64-3"></a><span class="co">#chr21 27866921  2  2 +</span></span>
-<span id="cb64-4"><a href="#cb64-4"></a><span class="co">#chr21 27866923  3  2 -</span></span>
-<span id="cb64-5"><a href="#cb64-5"></a><span class="co">#chr21 27867197  1  2 +</span></span>
-<span id="cb64-6"><a href="#cb64-6"></a><span class="co">#chr21 27867198  1  7 -</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="co">#chr21 27866423  2 8 +</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="co">#chr21 27866424  1 3 -</span></span>
+<span id="cb65-3"><a href="#cb65-3"></a><span class="co">#chr21 27866921  2  2 +</span></span>
+<span id="cb65-4"><a href="#cb65-4"></a><span class="co">#chr21 27866923  3  2 -</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a><span class="co">#chr21 27867197  1  2 +</span></span>
+<span id="cb65-6"><a href="#cb65-6"></a><span class="co">#chr21 27867198  1  7 -</span></span></code></pre></div>
 <p>In some cases the strand information is not available, but one can infer from the position:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="co">#chr21 27866423  2 8 </span></span>
-<span id="cb65-2"><a href="#cb65-2"></a><span class="co">#chr21 27866424  1 3 </span></span>
-<span id="cb65-3"><a href="#cb65-3"></a><span class="co">#chr21 27866921  2  2 </span></span>
-<span id="cb65-4"><a href="#cb65-4"></a><span class="co">#chr21 27866923  3  2 </span></span>
-<span id="cb65-5"><a href="#cb65-5"></a><span class="co">#chr21 27867197  1  2 </span></span>
-<span id="cb65-6"><a href="#cb65-6"></a><span class="co">#chr21 27867198  1  7 </span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">#chr21 27866423  2 8 </span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="co">#chr21 27866424  1 3 </span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="co">#chr21 27866921  2  2 </span></span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="co">#chr21 27866923  3  2 </span></span>
+<span id="cb66-5"><a href="#cb66-5"></a><span class="co">#chr21 27867197  1  2 </span></span>
+<span id="cb66-6"><a href="#cb66-6"></a><span class="co">#chr21 27867198  1  7 </span></span></code></pre></div>
 <ul>
 <li><p><code>collapse_strands</code> If TRUE, the read in function will collapse the reads and summarize their methylation value. Usually, this option is set to TRUE, except in some special cases.</p></li>
 <li><p><code>synced_coordinates</code> In some rare cases, the coordinates are the same for the + and - strands with no strand information available:</p></li>
 </ul>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">#chr21 27866423  27866425 2   8 </span></span>
-<span id="cb66-2"><a href="#cb66-2"></a><span class="co">#chr21 27866423  27866425 1   3 </span></span>
-<span id="cb66-3"><a href="#cb66-3"></a><span class="co">#chr21 27866921  27866923 2   2 </span></span>
-<span id="cb66-4"><a href="#cb66-4"></a><span class="co">#chr21 27866921  27866923 3   2 </span></span>
-<span id="cb66-5"><a href="#cb66-5"></a><span class="co">#chr21 27867197  27867198 1   2 </span></span>
-<span id="cb66-6"><a href="#cb66-6"></a><span class="co">#chr21 27867197  27867198 1   7 </span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="co">#chr21 27866423  27866425 2   8 </span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="co">#chr21 27866423  27866425 1   3 </span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="co">#chr21 27866921  27866923 2   2 </span></span>
+<span id="cb67-4"><a href="#cb67-4"></a><span class="co">#chr21 27866921  27866923 3   2 </span></span>
+<span id="cb67-5"><a href="#cb67-5"></a><span class="co">#chr21 27867197  27867198 1   2 </span></span>
+<span id="cb67-6"><a href="#cb67-6"></a><span class="co">#chr21 27867197  27867198 1   7 </span></span></code></pre></div>
 </div>
 </div>
 <div id="specific-settings" class="section level2">
@@ -1907,20 +1916,26 @@ It is possible not to provide annotation data. In this case the sample names wil
 <div id="hdf5-backend" class="section level3">
 <h3>HDF5 backend</h3>
 <p>If the memory is limited and/or the study population is large, there is an option to use HDF5 backend.<br />
-Only one bedgraph file is in the memory at the same time, while the resulting object won’t be stored in the memory, but on-disk. Additional arguments to use HDF5: * Set <code>h5=TRUE</code> * Set <code>vect=FALSE</code> * h5_dir –&gt; a directory to save the final object. It is possible to save the object later. It increases the processing time significantly.<br />
-* h5temp –&gt; a temporary directory to use during data processing. Set this if for example the default temporary location doesn’t have enough free space to store the temporary data.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>meth &lt;-<span class="st"> </span>methrix<span class="op">::</span><span class="kw">read_bedgraphs</span>(</span>
-<span id="cb67-2"><a href="#cb67-2"></a>  <span class="dt">files =</span> bdg_files,</span>
-<span id="cb67-3"><a href="#cb67-3"></a>  <span class="dt">ref_cpgs =</span> hg19_cpgs,</span>
-<span id="cb67-4"><a href="#cb67-4"></a>  <span class="dt">chr_idx =</span> <span class="dv">1</span>,</span>
-<span id="cb67-5"><a href="#cb67-5"></a>  <span class="dt">start_idx =</span> <span class="dv">2</span>,</span>
-<span id="cb67-6"><a href="#cb67-6"></a>  <span class="dt">M_idx =</span> <span class="dv">3</span>,</span>
-<span id="cb67-7"><a href="#cb67-7"></a>  <span class="dt">U_idx =</span> <span class="dv">4</span>,</span>
-<span id="cb67-8"><a href="#cb67-8"></a>  <span class="dt">stranded =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb67-9"><a href="#cb67-9"></a>  <span class="dt">zero_based =</span> <span class="ot">FALSE</span>, </span>
-<span id="cb67-10"><a href="#cb67-10"></a>  <span class="dt">coldata =</span> sample_anno,</span>
-<span id="cb67-11"><a href="#cb67-11"></a>  <span class="dt">vect =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb67-12"><a href="#cb67-12"></a>  <span class="dt">h5 =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+Only one bedgraph file is in the memory at the same time, while the resulting object won’t be stored in the memory, but on-disk. Additional arguments to use HDF5:</p>
+<ul>
+<li>Set <code>h5=TRUE</code></li>
+<li>Set <code>vect=FALSE</code></li>
+<li>h5_dir –&gt; a directory to save the final object. It is possible to save the object later. It increases the processing time significantly.<br />
+</li>
+<li>h5temp –&gt; a temporary directory to use during data processing. Set this if for example the default temporary location doesn’t have enough free space to store the temporary data.</li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>meth &lt;-<span class="st"> </span>methrix<span class="op">::</span><span class="kw">read_bedgraphs</span>(</span>
+<span id="cb68-2"><a href="#cb68-2"></a>  <span class="dt">files =</span> bdg_files,</span>
+<span id="cb68-3"><a href="#cb68-3"></a>  <span class="dt">ref_cpgs =</span> hg19_cpgs,</span>
+<span id="cb68-4"><a href="#cb68-4"></a>  <span class="dt">chr_idx =</span> <span class="dv">1</span>,</span>
+<span id="cb68-5"><a href="#cb68-5"></a>  <span class="dt">start_idx =</span> <span class="dv">2</span>,</span>
+<span id="cb68-6"><a href="#cb68-6"></a>  <span class="dt">M_idx =</span> <span class="dv">3</span>,</span>
+<span id="cb68-7"><a href="#cb68-7"></a>  <span class="dt">U_idx =</span> <span class="dv">4</span>,</span>
+<span id="cb68-8"><a href="#cb68-8"></a>  <span class="dt">stranded =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb68-9"><a href="#cb68-9"></a>  <span class="dt">zero_based =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb68-10"><a href="#cb68-10"></a>  <span class="dt">coldata =</span> sample_anno,</span>
+<span id="cb68-11"><a href="#cb68-11"></a>  <span class="dt">vect =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb68-12"><a href="#cb68-12"></a>  <span class="dt">h5 =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## ----------------------------</code></pre>
 <pre><code>## -Preset:        Custom</code></pre>
 <pre><code>## --Missing beta and coverage info. Estimating them from M and U values</code></pre>
@@ -1941,7 +1956,7 @@ Only one bedgraph file is in the memory at the same time, while the resulting ob
 <pre><code>## --CpGs missing: 28,216,746 (from known reference CpGs)</code></pre>
 <pre><code>## -Processing:    N2.bedGraph.gz</code></pre>
 <pre><code>## --CpGs missing: 28,216,747 (from known reference CpGs)</code></pre>
-<pre><code>## -Finished in:  53.5s elapsed (49.0s cpu)</code></pre>
+<pre><code>## -Finished in:  53.4s elapsed (47.3s cpu)</code></pre>
 </div>
 </div>
 </div>
