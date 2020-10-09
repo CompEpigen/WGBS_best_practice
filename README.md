@@ -1,1 +1,1 @@
-[Link to vignette](https://compepigen.github.io/WGBS_best_practice/)
+[Link to the best practice workflow](https://compepigen.github.io/WGBS_best_practice/)
