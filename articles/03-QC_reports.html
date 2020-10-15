@@ -104,7 +104,7 @@
 <h2 class="hasAnchor">
 <a href="#initial-qc-and-summary" class="anchor"></a>Initial QC and summary</h2>
 <p>Without any further processing, we can create an interactive html report containing basic summary statistics of the <code>methrix</code> object with <code>methrix_report</code> function.</p>
-<p>The report can be accessed <a href="https://compepigen.github.io/methrix_docs/docs/articles/raw_report.html">here</a></p>
+<p>The report can be accessed <a href="https://compepigen.github.io/methrix_docs/articles/raw_report.html">here</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu">methrix</span><span class="fu">::</span><span class="fu"><a href="../reference/methrix_report.html">methrix_report</a></span><span class="op">(</span>meth <span class="op">=</span> <span class="va">meth</span>, output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, prefix <span class="op">=</span> <span class="st">"initial"</span><span class="op">)</span></pre></div>
 <p>In the report, we can check genome-wide and chromosome based statistics on coverage and methylation, in order to identify potential quality issues, for example:</p>
@@ -139,19 +139,19 @@
 <span class="co">#&gt; -Masked 229099 CpGs due to too low coverage in sample WT_D6_R1.</span>
 <span class="co">#&gt; -Masked 244079 CpGs due to too low coverage in sample WT_D6_R2.</span>
 <span class="co">#&gt; -Masked 215091 CpGs due to too low coverage in sample WT_D6_R3.</span>
-<span class="co">#&gt; -Finished in:  14.7s elapsed (11.5s cpu)</span></pre></div>
+<span class="co">#&gt; -Finished in:  14.3s elapsed (11.1s cpu)</span></pre></div>
 <p>Later we can remove those sites that are not covered by any of the samples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">meth</span> <span class="op">&lt;-</span> <span class="fu">methrix</span><span class="fu">::</span><span class="fu"><a href="../reference/remove_uncovered.html">remove_uncovered</a></span><span class="op">(</span><span class="va">meth</span><span class="op">)</span> 
 <span class="co">#&gt; -Removed 254,494 [0.9%] uncovered loci of 28,217,448 sites</span>
-<span class="co">#&gt; -Finished in:  2.642s elapsed (1.922s cpu)</span></pre></div>
+<span class="co">#&gt; -Finished in:  2.494s elapsed (1.818s cpu)</span></pre></div>
 <p>We might want to remove the sites that are sparsely covered. The function <code>coverage_filter</code> has multiple options on how to perform this. We can set a threshold on the coverage and use either min_samples (minimum number of samples) or prop_samples (minimum proportion of the samples) to define the minimum size of samples that should excess the threshold for each CpG side. <code>bsseq</code> requires</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="co">#meth &lt;- methrix::coverage_filter(m=meth, cov_thr = 5, min_samples = 2)</span>
 <span class="co">#or</span>
 <span class="va">meth</span> <span class="op">&lt;-</span> <span class="fu">methrix</span><span class="fu">::</span><span class="fu"><a href="../reference/coverage_filter.html">coverage_filter</a></span><span class="op">(</span>m<span class="op">=</span><span class="va">meth</span>, cov_thr <span class="op">=</span> <span class="fl">5</span>, min_samples <span class="op">=</span> <span class="fl">2</span>, group<span class="op">=</span><span class="st">"Day"</span><span class="op">)</span>
 <span class="co">#&gt; -Retained 25,092,237 of 27,962,954 sites</span>
-<span class="co">#&gt; -Finished in:  3.084s elapsed (2.376s cpu)</span></pre></div>
+<span class="co">#&gt; -Finished in:  3.011s elapsed (2.307s cpu)</span></pre></div>
 </div>
 <div id="snp-filtering" class="section level3">
 <h3 class="hasAnchor">
@@ -194,7 +194,7 @@
 <span class="co">#&gt;       chr      N</span>
 <span class="co">#&gt; Sum:</span>
 <span class="co">#&gt; [1] 3130322</span>
-<span class="co">#&gt; -Finished in:  00:01:11 elapsed (00:01:03 cpu)</span></pre></div>
+<span class="co">#&gt; -Finished in:  00:01:10 elapsed (00:01:02 cpu)</span></pre></div>
 <ul>
 <li>There is a possibility to keep the sites possibly overlapping with SNPs. We can use this data for detecting possible sample mismatches. For this, we need to plot the most variable sites (probably the ones that are variable in our study population) and plot them on a heatmap.</li>
 </ul>
@@ -220,7 +220,7 @@
 <p><strong>Important:</strong> Don’t forget to set the <code>recal_stats</code> to <code>TRUE</code>, since the object changed since reading in. The output directory has to be different from last time, to avoid using the intermediate files calculated during the last run.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu">methrix</span><span class="fu">::</span><span class="fu"><a href="../reference/methrix_report.html">methrix_report</a></span><span class="op">(</span>meth <span class="op">=</span> <span class="va">meth</span>, output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, recal_stats <span class="op">=</span> <span class="cn">TRUE</span>, prefix<span class="op">=</span><span class="st">"processed"</span><span class="op">)</span></pre></div>
-<p>The report can be found <a href="https://compepigen.github.io/methrix_docs/docs/articles/tidy_report.html">here</a>)</p>
+<p>The report can be found <a href="https://compepigen.github.io/methrix_docs/articles/tidy_report.html">here</a></p>
 <p>There are additional possibilities to visualize the study. We can look at the density of coverage both sample- and group-wise:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu">methrix</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_coverage.html">plot_coverage</a></span><span class="op">(</span>m <span class="op">=</span> <span class="va">meth</span>, type <span class="op">=</span> <span class="st">"dens"</span><span class="op">)</span></pre></div>
